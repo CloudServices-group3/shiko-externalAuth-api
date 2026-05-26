@@ -1,0 +1,6 @@
+@Shiko.ExternalAuth.API_HostAddress = http://localhost:5268
+
+GET {{Shiko.ExternalAuth.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
