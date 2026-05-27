@@ -21,7 +21,6 @@ public class GoogleAuthService(IConfiguration config, IHttpClientFactory httpCli
         return await client.PostAsJsonAsync("/api/auth/external-login", new
         {
             Email = email,
-            DisplayName = displayName,
             Provider = "Google"
         });
     }
