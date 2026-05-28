@@ -1,4 +1,5 @@
 ﻿using Google.Apis.Auth;
+using Google.Apis.Auth.OAuth2.Responses;
 using Shiko.ExternalAuth.API.Models;
 using Shiko.ExternalAuth.API.Services;
 
@@ -10,7 +11,13 @@ public static class ExternalAuthEndpoints
     {
         var group = app.MapGroup("/api/external-auth");
 
-        group.MapPost("/google", GoogleLogin);
+        group.MapPost("/google", GoogleLogin)
+            .WithSummary("Google Login")
+            .WithDescription("Login with Google by providing a valid Google ID token." +
+            " Returns access and refresh tokens if successful.")
+            .Produces<TokenResponse>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status401Unauthorized); 
+
     }
 
     private static async Task<IResult> GoogleLogin(
@@ -30,14 +37,22 @@ public static class ExternalAuthEndpoints
 
             if (!response.IsSuccessStatusCode)
                 return Results.Unauthorized();
+            //using json to avoid creating dtos for the response from auth api
+            var jsonResult = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>();
 
-            // return access + refresh token
-            var result = await response.Content.ReadFromJsonAsync<object>();
-            return Results.Ok(result);
+
+            // return json to Next.js-frontend
+            return Results.Ok(jsonResult);
         }
         catch (InvalidJwtException)
         {
             return Results.Unauthorized();
+        }
+        catch (Exception ex)
+        {
+            // catch all errors and log for debugging
+            Console.WriteLine($"[CRITICAL ERROR] google login failed: {ex.Message}");
+            return Results.Problem("something went wrong trying to log in.", statusCode: 500);
         }
     }
 }

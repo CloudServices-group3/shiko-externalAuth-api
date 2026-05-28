@@ -14,6 +14,15 @@ builder.Services.AddHttpClient("AuthApi", client =>
 
 builder.Services.AddScoped<GoogleAuthService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -23,19 +32,14 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+
+app.UseCors("AllowFrontend");
+
 app.UseHttpsRedirection();
 
 app.MapExternalAuthEndpoints();
 
-// TEMP: mock av auth endpoint, tas bort sen
-app.MapPost("/api/auth/external-login", (ExternalLoginRequest request) =>
-{
-    return Results.Ok(new
-    {
-        accessToken = "fake-access-token",
-        refreshToken = "fake-refresh-token"
-    });
-});
-
 app.Run();
+
+
 
