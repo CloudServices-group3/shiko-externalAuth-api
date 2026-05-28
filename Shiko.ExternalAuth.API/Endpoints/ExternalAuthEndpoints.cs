@@ -22,7 +22,8 @@ public static class ExternalAuthEndpoints
 
     private static async Task<IResult> GoogleLogin(
         GoogleTokenRequest request,
-        GoogleAuthService googleAuthService)
+        GoogleAuthService googleAuthService
+        )
     {
         try
         {
@@ -37,12 +38,10 @@ public static class ExternalAuthEndpoints
 
             if (!response.IsSuccessStatusCode)
                 return Results.Unauthorized();
-            //using json to avoid creating dtos for the response from auth api
-            var jsonResult = await response.Content.ReadFromJsonAsync<System.Text.Json.JsonElement>();
 
+            var loginResult = await response.Content.ReadFromJsonAsync<LoginResult>();
 
-            // return json to Next.js-frontend
-            return Results.Ok(jsonResult);
+            return Results.Ok(loginResult);
         }
         catch (InvalidJwtException)
         {
