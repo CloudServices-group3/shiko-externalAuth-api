@@ -15,11 +15,15 @@ builder.Services.AddHttpClient("AuthApi", client =>
 
 builder.Services.AddScoped<GoogleAuthService>();
 
+//CORS - add url to deployed frontend
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+        policy.WithOrigins("http://localhost:3000",
+            "https://localhost:3000",
+            "https://shiko-frontend-silk.vercel.app")
+              
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -28,11 +32,13 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.MapOpenApi();
+app.MapScalarApiReference();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-    app.MapScalarApiReference();
+   
 }
 
 

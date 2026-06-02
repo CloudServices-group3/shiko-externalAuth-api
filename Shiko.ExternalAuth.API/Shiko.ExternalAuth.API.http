@@ -4,3 +4,7 @@ GET {{Shiko.ExternalAuth.API_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+
+DELETE https://shiko-auth-api-2.azurewebsites.net/api/auth/delete-user/307a06e0-1ee3-4679-bb74-1b462e741090
+
