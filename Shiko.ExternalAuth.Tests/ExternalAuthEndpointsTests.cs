@@ -16,6 +16,7 @@ namespace Shiko.ExternalAuth.Tests;
 public class ExternalAuthEndpointsTests(WebApplicationFactory<Program> factory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
+   
     [Fact]
     public async Task GoogleLogin_Endpoint_ShouldReturnOk_AndDeserializeCorrectly()
     {
