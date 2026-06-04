@@ -13,5 +13,5 @@ This service is deployed to Azure and runs as part of the Shiko microservices ar
 
 ## 🔗 Related Services
 
-- **Shiko Auth API** – Handles user creation and token generation
+- **Shiko Auth API** - https://github.com/CloudServices-group3/shiko-auth-api – Handles user creation and token generation
 - **Shiko Frontend** - https://github.com/CloudServices-group3/shiko-frontend – Sends the Google ID token to this API after the user authenticates with Google
