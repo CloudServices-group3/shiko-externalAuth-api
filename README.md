@@ -1,8 +1,9 @@
 # Shiko External Auth API
 
-Microservice responsible for handling Google OAuth2 authentication. Acts as a bridge between the Next.js frontend and the internal Auth API, validating Google ID tokens and returning access and refresh tokens upon successful login. 
+Microservice responsible for handling Google OAuth2 authentication. Acts as a bridge between the Next.js frontend and the internal Auth API, validating Google ID tokens and returning a LoginResult with access and refresh tokens upon successful login. 
 This service is deployed to Azure and runs as part of the Shiko microservices architecture.
 
+**API Documentation (Scalar):** [https://shiko-externalauth-cje2hud5d8akbkhs.swedencentral-01.azurewebsites.net/scalar](https://shiko-externalauth-cje2hud5d8akbkhs.swedencentral-01.azurewebsites.net/scalar)
 
 ## 🚀 Features
 
