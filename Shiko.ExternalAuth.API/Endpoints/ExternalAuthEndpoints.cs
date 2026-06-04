@@ -22,7 +22,7 @@ public static class ExternalAuthEndpoints
 
     private static async Task<IResult> GoogleLogin(
         GoogleTokenRequest request,
-        GoogleAuthService googleAuthService
+        IGoogleAuthService googleAuthService
         )
     {
         try

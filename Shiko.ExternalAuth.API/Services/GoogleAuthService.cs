@@ -2,7 +2,7 @@
 
 namespace Shiko.ExternalAuth.API.Services;
 
-public class GoogleAuthService(IConfiguration config, IHttpClientFactory httpClientFactory)
+public class GoogleAuthService(IConfiguration config, IHttpClientFactory httpClientFactory) : IGoogleAuthService
 {
     public async Task<GoogleJsonWebSignature.Payload> ValidateGoogleTokenAsync(string idToken)
     {

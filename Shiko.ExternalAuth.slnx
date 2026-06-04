@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="Shiko.ExternalAuth.API/Shiko.ExternalAuth.API.csproj" />
+  <Project Path="Shiko.ExternalAuth.Tests/Shiko.ExternalAuth.Tests.csproj" Id="cd954524-fda3-439e-a4f6-97b466402efc" />
 </Solution>

@@ -29,7 +29,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -40,7 +39,6 @@ if (app.Environment.IsDevelopment())
 {
    
 }
-
 
 app.UseCors("AllowFrontend");
 
